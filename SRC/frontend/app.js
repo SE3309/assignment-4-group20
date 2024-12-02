@@ -142,3 +142,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+document.getElementById("view-requests-btn").addEventListener("click", async () => {
+  try {
+      const response = await fetch("http://localhost:3000/api/maintenance-requests");
+
+      if (response.ok) {
+          const requests = await response.json();
+          const formattedRequests = requests
+              .map(
+                  (request) =>
+                      `Request #: ${request.Maintenance_Request_Number}, Type: ${request.Maintenance_Type}, Status: ${request.Status}`
+              )
+              .join("\n");
+          alert(`Maintenance Requests:\n\n${formattedRequests}`);
+      } else {
+          alert("Error retrieving maintenance requests.");
+          console.error(await response.json());
+      }
+  } catch (error) {
+      console.error("Error:", error);
+  }
+});
+

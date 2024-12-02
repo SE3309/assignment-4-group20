@@ -156,6 +156,19 @@ app.put("/api/students/:id", (req, res) => {
     });
 });
 
+// View Maintenance Requests
+app.get("/api/maintenance-requests", (req, res) => {
+  const query = "SELECT * FROM maintenancerequest";
+
+  pool.query(query, (err, results) => {
+      if (err) {
+          console.error("Error retrieving maintenance requests:", err);
+          return res.status(500).json({ error: "Error retrieving maintenance requests" });
+      }
+      res.json(results);
+  });
+});
+
 // Start Server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
