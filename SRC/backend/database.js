@@ -95,14 +95,14 @@ app.get("/api/students", (req, res) => {
 
 // 4. View Filtered Students
 app.get("/api/students/filter", (req, res) => {
-    const { Gender, Major } = req.query;
+    const { Major } = req.query;
 
     const query = `
         SELECT * FROM student 
-        WHERE Gender = ? AND Major = ?
+        WHERE Student_ID = ?
     `;
 
-    pool.query(query, [Gender, Major], (err, results) => {
+    pool.query(query, [Student_ID], (err, results) => {
         if (err) {
             console.error("Error retrieving filtered students:", err);
             return res.status(500).json({ error: "Error retrieving filtered students" });
@@ -147,7 +147,6 @@ app.put("/api/students/:id", (req, res) => {
         Emergency_Contact_Phone_Number,
         id,
     ];
-
     pool.query(query, values, (err, result) => {
         if (err) {
             console.error("Error updating student:", err);

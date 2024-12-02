@@ -98,16 +98,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // 4. Update Student
   document.getElementById("update-student-btn").addEventListener("click", async () => {
     const Student_ID = document.getElementById("update-student-id").value;
-    const First_Name = document.getElementById("first-name").value;
-    const Last_Name = document.getElementById("last-name").value;
-    const Email = document.getElementById("email").value;
-    const Gender = document.getElementById("gender").value;
-    const Major = document.getElementById("major").value;
+    const First_Name = document.getElementById("update-first-name").value;
+    const Last_Name = document.getElementById("update-last-name").value;
+    const Email = document.getElementById("update-email").value;
+    const Gender = document.getElementById("update-gender").value;
+    const Major = document.getElementById("update-major").value;
     const Emergency_Contact_Full_Name = document.getElementById(
-      "emergency-contact-name"
+      "update-emergency-contact-name"
     ).value;
     const Emergency_Contact_Phone_Number = document.getElementById(
-      "emergency-contact-phone"
+      "update-emergency-contact-phone"
     ).value;
 
     const data = {
