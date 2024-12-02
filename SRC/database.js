@@ -3,13 +3,124 @@ const { createPool } = require("mysql2"); //run npm install mysql2
 const pool = createPool({
   host: "localhost",
   user: "root",
-  password: "", //enter your password here 
+  password: "Finster_137", //enter your password here 
   database: "test",
   connectionLimit: 10,
 });
 
 let residencequery;
 
+// Add Event Listeners for Student Operations
+
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Add Student
+  document.getElementById("add-student-btn").addEventListener("click", () => {
+    const First_Name = document.getElementById("first-name").value;
+    const Last_Name = document.getElementById("last-name").value;
+    const Email = document.getElementById("email").value;
+    const Gender = document.getElementById("gender").value;
+    const Major = document.getElementById("major").value;
+    const Emergency_Contact_Full_Name = document.getElementById(
+      "emergency-contact-name"
+    ).value;
+    const Emergency_Contact_Phone_Number = document.getElementById(
+      "emergency-contact-phone"
+    ).value;
+
+    addStudent(
+      First_Name,
+      Last_Name,
+      Email,
+      Gender,
+      Major,
+      Emergency_Contact_Full_Name,
+      Emergency_Contact_Phone_Number,
+      (err, result) => {
+        if (err) {
+          alert("Error adding student. Please try again.");
+          console.error(err);
+        } else {
+          alert("Student added successfully!");
+          console.log(result);
+        }
+      }
+    );
+  });
+
+  // 2. View Student
+  document.getElementById("view-student-btn").addEventListener("click", () => {
+    const studentID = document.getElementById("view-student-id").value;
+
+    viewAllStudents((err, students) => {
+      if (err) {
+        alert("Error retrieving student information.");
+        console.error(err);
+      } else {
+        const student = students.find(
+          (student) => student.Student_ID == studentID
+        );
+        if (student) {
+          alert(
+            `Student Details:\n\nName: ${student.First_Name} ${student.Last_Name}\nEmail: ${student.Email}\nGender: ${student.Gender}\nMajor: ${student.Major}\nEmergency Contact: ${student.Emergency_Contact_Full_Name} (${student.Emergency_Contact_Phone_Number})`
+          );
+        } else {
+          alert("Student not found!");
+        }
+      }
+    });
+  });
+
+  // 3. Delete Student
+  document.getElementById("delete-student-btn").addEventListener("click", () => {
+    const studentID = document.getElementById("delete-student-id").value;
+
+    deleteStudent(studentID, (err, result) => {
+      if (err) {
+        alert("Error deleting student. Please try again.");
+        console.error(err);
+      } else {
+        alert("Student deleted successfully!");
+        console.log(result);
+      }
+    });
+  });
+
+  // 4. Update Student
+  document.getElementById("update-student-btn").addEventListener("click", () => {
+    const Student_ID = document.getElementById("update-student-id").value;
+    const First_Name = document.getElementById("first-name").value;
+    const Last_Name = document.getElementById("last-name").value;
+    const Email = document.getElementById("email").value;
+    const Gender = document.getElementById("gender").value;
+    const Major = document.getElementById("major").value;
+    const Emergency_Contact_Full_Name = document.getElementById(
+      "emergency-contact-name"
+    ).value;
+    const Emergency_Contact_Phone_Number = document.getElementById(
+      "emergency-contact-phone"
+    ).value;
+
+    updateStudent(
+      Student_ID,
+      First_Name,
+      Last_Name,
+      Email,
+      Gender,
+      Major,
+      Emergency_Contact_Full_Name,
+      Emergency_Contact_Phone_Number,
+      (err, result) => {
+        if (err) {
+          alert("Error updating student. Please try again.");
+          console.error(err);
+        } else {
+          alert("Student updated successfully!");
+          console.log(result);
+        }
+      }
+    );
+  });
+});
 
 // Queries for student functionalities:
 // 1. Add Student
