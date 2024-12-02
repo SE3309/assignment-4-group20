@@ -1,77 +1,170 @@
-const db = require('SRC\config\db.js'); // Adjust the path as needed
+const API_URL = "http://localhost:3000";
 
-// Example query to test the connection
-db.query('SELECT 1 + 1 AS solution', (err, results) => {
-    if (err) throw err;
-    console.log('The solution is: ', results[0].solution);
-});
-
-function showOption(option) {
-    const contentDiv = document.getElementById('content');
-    let content = '';
+function navigate(option) {
+    const contentDiv = document.getElementById("content");
+    let content = "";
 
     switch (option) {
-        case 'addRecord':
+        case "searchStudents":
             content = `
-                <h2>Add a Record</h2>
-                <form id="addRecordForm">
-                    <label for="recordName">Name:</label>
-                    <input type="text" id="recordName" name="recordName" required>
-                    <label for="recordValue">Value:</label>
-                    <input type="text" id="recordValue" name="recordValue" required>
-                    <button type="submit">Submit</button>
-                </form>
-            `;
-            break;
-        case 'viewRecords':
-            content = `<h2>View Records</h2><p>Loading records...</p>`;
-            fetchRecords(); // Call the backend to fetch records
-            break;
-        case 'updateRecord':
-            content = `
-                <h2>Update a Record</h2>
-                <form id="updateRecordForm">
-                    <label for="recordId">Record ID:</label>
-                    <input type="text" id="recordId" name="recordId" required>
-                    <label for="newValue">New Value:</label>
-                    <input type="text" id="newValue" name="newValue" required>
-                    <button type="submit">Update</button>
-                </form>
-            `;
-            break;
-        case 'deleteRecord':
-            content = `
-                <h2>Delete a Record</h2>
-                <form id="deleteRecordForm">
-                    <label for="recordIdToDelete">Record ID:</label>
-                    <input type="text" id="recordIdToDelete" name="recordIdToDelete" required>
-                    <button type="submit">Delete</button>
-                </form>
-            `;
-            break;
-        case 'searchRecord':
-            content = `
-                <h2>Search Records</h2>
-                <form id="searchRecordForm">
-                    <label for="searchQuery">Search Query:</label>
-                    <input type="text" id="searchQuery" name="searchQuery" required>
+                <h2>Search Students</h2>
+                <form id="searchForm">
+                    <label>Gender: <input type="text" name="gender"></label>
+                    <label>Major: <input type="text" name="major"></label>
+                    <label>Residence: <input type="text" name="residence"></label>
                     <button type="submit">Search</button>
                 </form>
+                <div id="results"></div>
             `;
             break;
-        case 'customQuery':
+
+        case "addDeleteStudent":
             content = `
-                <h2>Run Custom Query</h2>
-                <form id="customQueryForm">
-                    <label for="customSQL">SQL Query:</label>
-                    <textarea id="customSQL" name="customSQL" required></textarea>
-                    <button type="submit">Run Query</button>
+                <h2>Add/Delete Student</h2>
+                <form id="addForm">
+                    <label>Name: <input type="text" name="name" required></label>
+                    <label>Gender: <input type="text" name="gender" required></label>
+                    <label>Major: <input type="text" name="major" required></label>
+                    <label>Residence: <input type="text" name="residence" required></label>
+                    <button type="submit">Add Student</button>
+                </form>
+                <h3>Delete a Student</h3>
+                <form id="deleteForm">
+                    <label>ID: <input type="text" name="id" required></label>
+                    <button type="submit">Delete Student</button>
                 </form>
             `;
             break;
+
+        case "updateStudent":
+            content = `
+                <h2>Update Student Profile</h2>
+                <form id="updateForm">
+                    <label>Student ID: <input type="text" name="id" required></label>
+                    <label>Name: <input type="text" name="name"></label>
+                    <label>Gender: <input type="text" name="gender"></label>
+                    <label>Major: <input type="text" name="major"></label>
+                    <label>Residence: <input type="text" name="residence"></label>
+                    <button type="submit">Update Student</button>
+                </form>
+            `;
+            break;
+
+        case "viewRooms":
+            fetch(`${API_URL}/rooms`)
+                .then(res => res.json())
+                .then(data => {
+                    content = "<h2>Available Rooms</h2><ul>";
+                    data.forEach(room => {
+                        content += `<li>${room.room_number} - ${room.style} - ${room.amenities}</li>`;
+                    });
+                    content += "</ul>";
+                    contentDiv.innerHTML = content;
+                })
+                .catch(err => {
+                    contentDiv.innerHTML = `<p>Error: ${err.message}</p>`;
+                });
+            return;
+
+        case "browseResidences":
+            content = `
+                <h2>Browse Residences</h2>
+                <form id="browseForm">
+                    <label>Style: <input type="text" name="style"></label>
+                    <label>Amenities: <input type="text" name="amenities"></label>
+                    <button type="submit">Browse</button>
+                </form>
+                <div id="residences"></div>
+            `;
+            break;
+
+        case "borrowedItems":
+            content = `
+                <h2>Borrowed Items</h2>
+                <form id="borrowForm">
+                    <label>Student ID: <input type="text" name="student_id" required></label>
+                    <label>Item Name: <input type="text" name="item_name" required></label>
+                    <label>Borrow Date: <input type="date" name="borrow_date" required></label>
+                    <button type="submit">Add Borrowed Item</button>
+                </form>
+                <h3>Borrowed Items Report</h3>
+                <button id="generateReport">Generate Report</button>
+                <div id="borrowedReport"></div>
+            `;
+            break;
+
+        case "maintenanceRequests":
+            content = `
+                <h2>Maintenance Requests</h2>
+                <form id="createRequestForm">
+                    <label>Description: <input type="text" name="description" required></label>
+                    <label>Status: <input type="text" name="status" required></label>
+                    <button type="submit">Create Request</button>
+                </form>
+                <h3>View/Delete Maintenance Requests</h3>
+                <div id="maintenanceRequests"></div>
+            `;
+            break;
+
         default:
-            content = `<p>Option not available.</p>`;
+            content = "<p>Invalid option selected</p>";
     }
 
     contentDiv.innerHTML = content;
+
+    // Event Listeners for dynamic content
+    if (option === "searchStudents") {
+        document.getElementById("searchForm").addEventListener("submit", event => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const params = new URLSearchParams(formData).toString();
+            fetch(`${API_URL}/students?${params}`)
+                .then(res => res.json())
+                .then(data => {
+                    const resultsDiv = document.getElementById("results");
+                    resultsDiv.innerHTML = "<ul>" + data.map(student => `<li>${student.name} (${student.major})</li>`).join("") + "</ul>";
+                });
+        });
+    }
+
+    if (option === "addDeleteStudent") {
+        document.getElementById("addForm").addEventListener("submit", event => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch(`${API_URL}/students`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(Object.fromEntries(formData)),
+            }).then(res => res.json()).then(data => alert(data.message));
+        });
+
+        document.getElementById("deleteForm").addEventListener("submit", event => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch(`${API_URL}/students/${formData.get("id")}`, {
+                method: "DELETE",
+            }).then(res => res.json()).then(data => alert(data.message));
+        });
+    }
+
+    if (option === "borrowedItems") {
+        document.getElementById("borrowForm").addEventListener("submit", event => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch(`${API_URL}/borrowed-items`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(Object.fromEntries(formData)),
+            }).then(res => res.json()).then(data => alert(data.message));
+        });
+
+        document.getElementById("generateReport").addEventListener("click", () => {
+            fetch(`${API_URL}/borrowed-items/report`)
+                .then(res => res.json())
+                .then(data => {
+                    const reportDiv = document.getElementById("borrowedReport");
+                    reportDiv.innerHTML = "<ul>" + data.map(item => `<li>${item.student_name} borrowed ${item.item_name}</li>`).join("") + "</ul>";
+                });
+        });
+    }
 }

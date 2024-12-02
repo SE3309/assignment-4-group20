@@ -27,6 +27,7 @@
   "homepage": "https://github.com/SE3309/assignment-4-group20#readme",
   "dependencies": {
     "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-fileupload": "^1.5.1",
