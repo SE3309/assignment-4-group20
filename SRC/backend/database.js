@@ -169,7 +169,37 @@ app.get("/api/maintenance-requests", (req, res) => {
   });
 });
 
+//query residences matching specific search parameters
+app.get("/api/residences", (req, res) => {
+  console.log("Request for residences received:", req.query);
+
+  const { amenities, residence_group, room_type } = req.query;
+
+  const query = `
+        SELECT 
+            Residence_Name AS name, 
+            address,
+            capacity,
+            amenities,
+            Residence_Group AS residence_group, 
+            Room_Types AS room_type
+        FROM residence
+        WHERE amenities = ? AND Residence_Group = ? AND Room_Types = ?
+      `;
+
+  pool.query(query, [amenities, residence_group, room_type], (err, results) => {
+    if (err) {
+      console.error("Error retrieving residences:", err);
+      return res.status(500).json({ error: "Error retrieving residences" });
+    }
+    console.log("Results of request:", results); // Log the results
+    res.json(results);
+  });
+});
+
+
 // Start Server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+

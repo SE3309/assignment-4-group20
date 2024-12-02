@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residence Search</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+
+    <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown">
+            <a href="Student.html" class="dropbtn">Students</a>
+            <div class="dropdown-content">
+              <a href="#add-student">Add Student</a>
+              <a href="#delete-student">Delete Student</a>
+              <a href="#view-student">View Students</a>
+              <a href="#update-student">Update Student</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="Maintenance.html" class="dropbtn">Maintenance Requests</a>
+            <div class="dropdown-content">
+              <a href="#create-request">Create Request</a>
+              <a href="#delete-request">Delete Request</a>
+              <a href="#view-request">View Requests</a>
+              <a href="#update-request">Update Request</a>
+            </div>
+          </li>
+          <li><a href="#rooms">Available Rooms</a></li>
+          <li><a href="residence.html">Residences</a></li>
+          <li><a href="#borrowed-items">Borrowed Items</a></li>
+          <li><a href="#inventory">Inventory</a></li>
+          <li><a href="#reports">Reports</a></li>
+        </ul>
+      </nav>
+
+
+  <header>
+    <h1>Residence Search</h1>
+  </header>
+  <main>
+    <div class="container">
+      <h2>Search Residences</h2>
+      <form id="search-form">
+        <!-- Amenities Dropdown -->
+        <div class="form-group">
+          <label for="amenities">Amenities:</label>
+          <select id="amenities" name="amenities" required>
+            <option value="" disabled selected>Select amenities</option>
+            <option value="No dining hall.">No dining hall.</option>
+            <option value="All amenities included.">All amenities included.</option>
+          </select>
+        </div>
+
+        <!-- Residence Group Dropdown -->
+        <div class="form-group">
+          <label for="residence-group">Residence Group:</label>
+          <select id="residence-group" name="residence_group" required>
+            <option value="" disabled selected>Select residence group</option>
+            <option value="Suite-style">Suite-Style</option>
+            <option value="Hybrid-style">Hybrid-Style</option>
+            <option value="Traditional">Traditional</option>
+          </select>
+        </div>
+
+        <!-- Room Types Dropdown -->
+        <div class="form-group">
+          <label for="room-types">Room Type:</label>
+          <select id="room-types" name="room_types" required>
+            <option value="" disabled selected>Select room type</option>
+            <option value="Single room">Single room</option>
+            <option value="Double room">Double room</option>
+            <option value="Single or double room">Single or double room</option>
+          </select>
+        </div>
+
+        <!-- Search Button -->
+        <div class="form-group">
+          <button type="button" id="search-btn">Search</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="res-result"></div>
+  </main>
+  <footer>
+    <p>&copy; 2024 Residence Management System. All rights reserved.</p>
+  </footer>
+
+  
+</body>
+</html>
