@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residence Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li class="dropdown">
+        <a href="Student.html" class="dropbtn">Students</a>
+        <div class="dropdown-content">
+          <a href="#add-student">Add Student</a>
+          <a href="#delete-student">Delete Student</a>
+          <a href="#view-student">View Students</a>
+          <a href="#update-student">Update Student</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="#maintenance" class="dropbtn">Maintenance Requests</a>
+        <div class="dropdown-content">
+          <a href="#create-request">Create Request</a>
+          <a href="#delete-request">Delete Request</a>
+          <a href="#view-request">View Requests</a>
+          <a href="#update-request">Update Request</a>
+        </div>
+      </li>
+      <li><a href="#rooms">Available Rooms</a></li>
+      <li><a href="#residences">Residences</a></li>
+      <li><a href="#borrowed-items">Borrowed Items</a></li>
+      <li><a href="#inventory">Inventory</a></li>
+      <li><a href="#reports">Reports</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="buttons">
+      <button class="toggle-btn" data-target="add-section">Add Student</button>
+      <button class="toggle-btn" data-target="view-section">View Student</button>
+      <button class="toggle-btn" data-target="delete-section">Delete Student</button>
+      <button class="toggle-btn" data-target="update-section">Update Student</button>
+    </div>
+    <div class="sections">
+        <div id="add-section" class="section">
+            <h2>Add Student</h2>
+            <form id="add-student-form">
+              <div>
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first_name" placeholder="Enter first name" required>
+              </div>
+              <div>
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last_name" placeholder="Enter last name" required>
+              </div>
+              <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter email" required>
+              </div>
+              <div>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                  <option value="" disabled selected>Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="major">Major:</label>
+                <input type="text" id="major" name="major" placeholder="Enter major" required>
+              </div>
+              <div>
+                <label for="emergency-contact-name">Emergency Contact Full Name:</label>
+                <input type="text" id="emergency-contact-name" name="emergency_contact_full_name" placeholder="Enter contact's full name" required>
+              </div>
+              <div>
+                <label for="emergency-contact-phone">Emergency Contact Phone Number:</label>
+                <input type="tel" id="emergency-contact-phone" name="emergency_contact_phone_number" placeholder="Enter contact's phone number" required>
+              </div>
+              <div>
+                <button type="button" id="add-student-btn">Add Student</button>
+              </div>
+            </form>
+        </div>
+        <div id="view-section" class="section">
+            <h2>View Student</h2>
+            <form id="view-student-form">
+              <div>
+                <label for="view-student-id">Student ID:</label>
+                <input type="text" id="view-student-id" name="student_id" placeholder="Enter Student ID" required>
+              </div>
+              <div>
+                <button type="button" id="view-student-btn">View Student</button>
+              </div>
+            </form>
+        </div>
+        
+        <div id="delete-section" class="section">
+            <h2>Delete Student</h2>
+            <form id="delete-student-form">
+            <div>
+                <label for="delete-student-id">Student ID:</label>
+                <input type="text" id="delete-student-id" name="student_id" placeholder="Enter Student ID" required>
+            </div>
+            <div>
+                <button type="button" id="delete-student-btn">Delete Student</button>
+            </div>
+            </form>
+        </div>
+    
+        <div id="update-section" class="section">
+            <h2>Update Student</h2>
+            <form id="update-student-form">
+              <div>
+                <label for="update-student-id">Student ID:</label>
+                <input type="text" id="update-student-id" name="student_id" placeholder="Enter Student ID" required>
+              </div>
+              <div>
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first_name" placeholder="Enter first name">
+              </div>
+              <div>
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last_name" placeholder="Enter last name">
+              </div>
+              <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter email">
+              </div>
+              <div>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                  <option value="" disabled selected>Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="major">Major:</label>
+                <input type="text" id="major" name="major" placeholder="Enter major">
+              </div>
+              <div>
+                <label for="emergency-contact-name">Emergency Contact Full Name:</label>
+                <input type="text" id="emergency-contact-name" name="emergency_contact_full_name" placeholder="Enter contact's full name">
+              </div>
+              <div>
+                <label for="emergency-contact-phone">Emergency Contact Phone Number:</label>
+                <input type="tel" id="emergency-contact-phone" name="emergency_contact_phone_number" placeholder="Enter contact's phone number">
+              </div>
+              <div>
+                <button type="button" id="update-student-btn">Update Student</button>
+              </div>
+            </form>
+          </div>          
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.toggle-btn');
+      const sections = document.querySelectorAll('.section');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          const targetId = button.getAttribute('data-target');
+
+          sections.forEach(section => {
+            if (section.id === targetId) {
+              section.classList.add('active');
+            } else {
+              section.classList.remove('active');
+            }
+          });
+        });
+      });
+    });
+  </script>
+
+  
+<footer>
+    <p>&copy; 2024 Residence Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>
