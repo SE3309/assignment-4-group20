@@ -4,8 +4,8 @@ const mysql = require('mysql');
 const db = mysql.createConnection({
     host: 'localhost',          // Your MySQL server host (usually 'localhost')
     user: 'root',      // Your MySQL username (e.g., 'root')
-    password: 'your_password',  // Your MySQL password
-    database: 'your_database'   // The name of your database in Workbench
+    password: 'PUT YOUR PASSWORD HERE',  // Your MySQL password
+    database: '3309'   // The name of your database in Workbench
 });
 
 // Connect to the database

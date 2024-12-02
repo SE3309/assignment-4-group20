@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Web App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>My Database Application</h1>
+    </header>
+    <main>
+        <nav>
+            <ul>
+                <li><button onclick="showOption('addRecord')">Add Record</button></li>
+                <li><button onclick="showOption('viewRecords')">View Records</button></li>
+                <li><button onclick="showOption('updateRecord')">Update Record</button></li>
+                <li><button onclick="showOption('deleteRecord')">Delete Record</button></li>
+                <li><button onclick="showOption('searchRecord')">Search Records</button></li>
+            </ul>
+        </nav>
+        <section id="content">
+            <p>Choose an option to get started.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Database App</p>
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>
