@@ -314,6 +314,45 @@ pool.query(insertQuery, studentData, (err, result) => {
   console.log("Inserted successfully:", result);
 });
 
+function createInventorySummaryView(callback) {
+  const query = `
+    CREATE OR REPLACE VIEW InventorySummaryByResidence AS
+    SELECT 
+        Residence_Name,
+        Category,
+        SUM(Quantity) AS Total_Quantity
+    FROM 
+        cafinventory
+    GROUP BY 
+        Residence_Name, Category;
+  `;
+
+  pool.query(query, (err, result) => {
+    if (err) {
+      console.error("Error creating InventorySummaryByResidence view:", err);
+      return callback(err, null);
+    }
+    console.log("InventorySummaryByResidence view created successfully:", result);
+    return callback(null, result);
+  });
+};
+
+function fetchInventorySummary(callback) {
+  const query = `
+    SELECT * 
+    FROM InventorySummaryByResidence;
+  `;
+
+  pool.query(query, (err, result) => {
+    if (err) {
+      console.error("Error fetching InventorySummaryByResidence:", err);
+      return callback(err, null);
+    }
+    console.log("Fetched InventorySummaryByResidence:", result);
+    return callback(null, result);
+  });
+}
+
 // Export all functions
 module.exports = {
   addStudent,
