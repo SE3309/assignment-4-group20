@@ -1,34 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Residence Management App</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residence Management System</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Residence Management System</h1>
-    </header>
-    <main>
-        <nav>
-            <ul>
-                <li><button onclick="navigate('searchStudents')">Search Students</button></li>
-                <li><button onclick="navigate('addDeleteStudent')">Add/Delete Student</button></li>
-                <li><button onclick="navigate('updateStudent')">Update Student Profiles</button></li>
-                <li><button onclick="navigate('viewRooms')">View Available Rooms</button></li>
-                <li><button onclick="navigate('browseResidences')">Browse Residences</button></li>
-                <li><button onclick="navigate('borrowedItems')">Borrowed Items</button></li>
-                <li><button onclick="navigate('maintenanceRequests')">Maintenance Requests</button></li>
-            </ul>
-        </nav>
-        <section id="content">
-            <p>Select an option from the menu to get started.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Residence Management System</p>
-    </footer>
-    <script src="app.js"></script>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li class="dropdown">
+        <a href="#students" class="dropbtn">Students</a>
+        <div class="dropdown-content">
+          <a href="#add-student">Add Student</a>
+          <a href="#delete-student">Delete Student</a>
+          <a href="#view-student">View Students</a>
+          <a href="#update-student">Update Student</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="#maintenance" class="dropbtn">Maintenance Requests</a>
+        <div class="dropdown-content">
+          <a href="#create-request">Create Request</a>
+          <a href="#delete-request">Delete Request</a>
+          <a href="#view-request">View Requests</a>
+          <a href="#update-request">Update Request</a>
+        </div>
+      </li>
+      <li><a href="#rooms">Available Rooms</a></li>
+      <li><a href="#residences">Residences</a></li>
+      <li><a href="#borrowed-items">Borrowed Items</a></li>
+      <li><a href="#inventory">Inventory</a></li>
+      <li><a href="#reports">Reports</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Welcome to the Residence Management System</h1>
+    <p>Select a section from the navigation bar to get started.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Residence Management System. All rights reserved.</p>
+  </footer>
 </body>
 </html>
